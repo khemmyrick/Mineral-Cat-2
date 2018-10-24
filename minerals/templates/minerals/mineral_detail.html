@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% load static from staticfiles %}
+
+{% load mineral_extras %}
+{% block title %} - {{ mineral.name }}{% endblock%}
+{% block content %}
+  <div class="bounds bounds--small">
+    <div class="grid-100 mineral__container">
+      <h1 class="mineral__name">{{ mineral.name }}</h1>
+      <div class="mineral__image-bg">
+        <img class="mineral__image" src="{% static 'img/' %}{{ mineral.name|safe }}.jpg" alt="{{ mineral.name|title }}">
+        <p class="mineral__caption">{{ mineral.imgcap }}</p>
+      </div>
+      <div class="mineral__table-container">
+		<table class="mineral__table">
+			<tbody>
+				<tr>
+					<td class="mineral__category"><h4>Group</h4></td>
+					<td><h4><a class="minerals__anchor"  id="{{ mineral.group.name|slugify }}" href="{% url 'minerals:group_list' pk=mineral.group.pk %}">{{ mineral.group.name }}</a></h4></td>
+				</tr>
+				<tr>
+					<td class="mineral__category"><h4>Category</h4></td>
+					<td><h4>{{ mineral.category }}</h4></td>
+				</tr>
+				<tr>
+					<td class="mineral__category"><h4>Forumula</h4></td>
+					<td><h4>{{ mineral.formula|safe }}</h4></td>
+				</tr>
+				{% for attr in attrlist %}
+					{% if attr.1 %}
+						<tr>
+							<td class="mineral__category">{{ attr.0|title|underspace }}</td>
+							<td>{{ attr.1|safe }}</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

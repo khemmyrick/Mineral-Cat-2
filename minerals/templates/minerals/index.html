@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% load static from staticfiles %}
+
+{% load mineral_extras %}
+{% block title %} - Home{% endblock %}
+{% block content %}
+	<h3 class="logo_text text-centered">Welcome to MineralCat: "The Purrfect Meowneral Catabase!"</h3>
+	<h4 class="logo_text text-centered">We have so MEOWny minerals for you today!</h4>
+
+	<div class="slideshow-container">
+
+		{% for group in groups %}
+			<div class="mySlides fade">
+				<div class="numbertext">{{ group.pk }} / 13</div>
+				<img class="slideimg" src="{% static 'img/' %}{{ group.name|jpegger }}">
+				<div class="text"><a id="slides" class="minerals__anchor" href="{% url 'minerals:group_list' pk=group.pk %}">{{ group.name }}!</a></div>
+			</div>
+		{% endfor %}
+		<!-- Slideshow buttons -->
+		<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+		<a class="next" onclick="plusSlides(1)">&#10095;</a>
+	</div>
+	<br>
+
+	<!-- Slide step indicators. -->
+	<div style="text-align:center">
+		{% for group in groups %}
+			<span class="dot" onclick="currentSlide({{ group.pk }})"></span> 
+		{% endfor %}
+	</div>
+	<hr>
+	<h4 class="logo_text text-centered">Please click an option to get started.</h4>
+	<script src="{% static 'js/' %}sliders.js"></script>
+{% endblock %}

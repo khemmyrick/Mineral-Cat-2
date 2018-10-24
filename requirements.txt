@@ -1,0 +1,6 @@
+anaconda-client==1.6.5
+anaconda-navigator==1.6.9
+anaconda-project==0.8.0
+django==2.1
+jsonschema==2.6.0
+python==3.6.3

@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %} - {{ group.name }} List{% endblock%}
+{% block content %}
+    <div class="grid-100">
+		<h1 class="mineral__name" align="center">{{ group.name }} Group</h1>
+		<p><a class="minerals__anchor" id="{{ group.name|slugify }}" href="{% url 'minerals:random_ingroup' pk=group.pk %}">Click Here For Random {{ group.name }}</a></p>
+		<ul class="minerals__container">
+			{% for mineral in minerals %}
+				<li class="minerals__item">
+					<a class="minerals__anchor" id="{{ mineral.group.name|slugify }}" href="{% url 'minerals:mineral_detail' pk=mineral.pk %}">{{ mineral.name }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+    </div>
+{% endblock %}
