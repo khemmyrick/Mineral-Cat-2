@@ -3,7 +3,7 @@
 		{% if pk == group.pk %} <!-- How do I make this look at which group we're currently looking at? -->
 		<strong>{{ group.name }}</strong>
 		{% else %}
-		<a class="group__anchor" href="{% url 'minerals:group_list' pk=group.pk %}">{{ group.name }}</a>
+		<a class="group__anchor" id="{{ group.name|slugify }}" href="{% url 'minerals:group_list' pk=group.pk %}">{{ group.name }}</a>
 		{% endif %}
 	</li>
 {% endfor %}
