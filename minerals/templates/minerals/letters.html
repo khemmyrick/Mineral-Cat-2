@@ -1,0 +1,14 @@
+<div style="text-align: center">
+	{% for char in alpha_search %}
+		{% if term %}
+			{% if char == term %}
+				<strong>{{ char }}</strong>
+			{% else %}
+				<a href="{% url 'minerals:by_alpha' term=char %}">{{ char }}</a>
+			{% endif %}
+		{% else %}
+			<a href="{% url 'minerals:by_alpha' term=char %}">{{ char }}</a>
+		{% endif %}
+		
+	{% endfor %}
+</div>

@@ -160,7 +160,7 @@ input[type="text"]::-moz-placeholder { font-weight: normal; }
 input[type="text"]:-ms-input-placeholder { font-weight: normal; }
 input[type="text"]:focus { border-color: #97cca6; }
 
-ul { list-style: circle inside; padding-left: 0; margin-top: 0; }
+ul { list-style: none; padding-left: 0; margin-top: 0; }
 
 li { margin-bottom: 1rem; font-size: 1.3rem; }
 
@@ -187,6 +187,8 @@ table, p, ul { margin-bottom: 2.5rem; }
 @media (min-width: 640px) { .minerals__container { -webkit-column-count: 3; -moz-column-count: 3; column-count: 3; } }
 .minerals__anchor { border: solid 2px #DCF5F2 !important; border-radius: 100px; color: #384033; display: block; font-size: 13px; text-align: center; padding: 8px 0 7px 0; width: 100%; transition: background-color 200ms ease-in-out, font-weight 200ms ease-in-out, color 200ms ease-in-out; }
 .minerals__anchor:hover { background-color: #DCF5F2; color: #384033; font-weight: bold; }
+.group__anchor { border: solid 1px #DCF5F2 !important; border-radius: 50px; color: #384033; display: block; font-size: 13px; text-align: center; padding: 2px 0 1px 0; width: 100%; transition: background-color 200ms ease-in-out, font-weight 200ms ease-in-out, color 200ms ease-in-out; }
+.group__anchor:hover { background-color: #DCF5F2; color: #384033; font-weight: bold; }
 .minerals__random { background-color: #384033; box-shadow: 0 0 100px 50px #CAE5D2; color: #000000; padding: 20px 0 20px 0; position: fixed; bottom: 0; text-align: center; width: 100%; }
 .minerals__random .minerals__anchor { display: inline; color: #000000; padding: 6px 24px 5px 24px; }
 .minerals__random .minerals__anchor:hover { color: #384033; }

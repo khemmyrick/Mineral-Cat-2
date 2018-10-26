@@ -1,6 +1,8 @@
 # MINERAL CATALOG v2
 
-#Just Did
+
+# Just Did
+
 1. Start Project 8 from end of Project 6.
 2. Search by Group functionality somewhat deployed as of Project 6!
 	- Search by Group functionality needs to be adjusted to Project 8 specs. []
@@ -19,7 +21,7 @@
 # To Do:
 1. Allow filtering by the first letter of the mineral name. []
 	- Add links for each letter of the alphabet. [x]
-	- This should be added to the layout template so that it appears on every page.[]<---(This specifically is surprisingly difficult)
+	- This should be added to the layout template so that it appears on every page.[x]
 	- When a letter is clicked, a list of minerals that start with that letter should be displayed in the list view.[x]
 	- The letter of the alphabet currently being displayed should be bolded.[]
 	- In the details view, no letter should be bolded.[]
@@ -33,13 +35,14 @@
 	- Add the search form to the layout template so that searching can be performed from any page in the site.[x]
 
 3. Allow filtering by group. []
-	- Add the ability to filter the list of minerals by adding links to these groups on the left side of the layout template. []
+	- Add the ability to filter the list of minerals by adding links to these groups on the left side of the layout template.[x]
 	- Clicking a group name, displays a list of all of the minerals in the database that are in that group. []
-	- The group name being displayed should be bolded. []
+	- The group name being displayed should be bolded. []<--(use if block.  Easy[!!!?], once template tag issue is sorted.)
 	- In the details view, no group name should be bolded. []
 
-4. Optimize database queries [] <---- This might be the hard part.
-	- Use the django-debug-toolbar to check that queries to the database take no longer than 10ms to complete.
+4. Optimize database queries [] <---- This should be the hard part.
+	- Apply django-debug-toolbar to project. []
+	- Use the django-debug-toolbar to check that queries to the database take no longer than 10ms to complete. []
 
 5. Unit test the app. []
 	- Write unit tests to test that each view is displaying the correct information.[]
@@ -51,7 +54,7 @@
 7. Coding Style[]
 	- Make sure your coding style complies with PEP 8.[]
 
-	
+
 # To Exceed Expectations! (Definitely Do These)
 1. Allow full-text search[x]
 	- Instead of only searching the mineral names, the site will search all fields in the database and display the names of the minerals that contain the search text. [x]

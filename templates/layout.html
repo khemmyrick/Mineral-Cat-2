@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load mineral_extras %}
 
 <!DOCTYPE html>
 <html lang="en-US">
@@ -23,7 +24,7 @@
 					<h1 class="logo_name text-centered">Mineral Cat 2.0</h1>
 				</a>
 				<p class="logo_text text-centered">The <strong>Purr</strong>fect <strong>Meow</strong>neral <strong>Cat</strong>abase!</p>
-				<nav>
+				<nav>			
 					<ul>
 						<li><a href="{% url 'minerals:index' %}" class="minerals__anchor">Home</a></li>
 						<li><a href="{% url 'minerals:mineral_list' %}" class="minerals__anchor">Mineral List</a></li>
@@ -37,9 +38,14 @@
 				</nav>
 				<hr>
 			</header>
+			<ul class="group_menu">
+				<h3 class="text-centered">Mineral Groups</h3>
+				{% nav_groups_list %}
+			</ul>
 			<div class="grid-100">
 			<!-- Move ABCs with links to first letter searches here from mineral_list template -->
 			<!-- MAYBE use an inclusion tag somehow? -->
+			{% abc_list %}
 			{% block content %}{% endblock %}
 			</div>
 		</div>

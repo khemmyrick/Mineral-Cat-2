@@ -1,0 +1,9 @@
+{% for group in groups %}
+	<li>
+		{% if pk == group.pk %}
+		<strong>{{ group.name }}</strong>
+		{% else %}
+		<a class="group__anchor" href="{% url 'minerals:group_list' pk=group.pk %}">{{ group.name }}</a>
+		{% endif %}
+	</li>
+{% endfor %}

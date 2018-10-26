@@ -37,6 +37,29 @@
 	width: 40%;
     vertical-align: super;
 	}
+
+/*	
+#group_menu {
+	position: fixed;
+	left: 0;
+	top: 50%;
+	width: 8em;
+	margin-top: -2.5em;
+} */
+	
+.group_menu {
+	background-color: transparent;
+	/* background: linear-gradient(to bottom, transparent, transparent, 35%, #384033 50%, #384033, transparent 65%); */
+	/* box-shadow: 0 0 100px 50px #CAE5D2; */
+	color: #000000;
+	padding: 5px 0 5px 0;
+	position: fixed;
+	left: 0;
+	text-align: left;
+	width: 15%;
+	overflow: auto;
+	}
+
 	
 	#slides {
     background: linear-gradient(to bottom, #BDE5DD, #BDE5DD 25%, transparent 50%, transparent, #BDE5DD 75%);	

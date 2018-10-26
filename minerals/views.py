@@ -25,14 +25,12 @@ def index(request):
 
 def mineral_list(request, **kwargs):
     """Generate template list of all minerals."""
-    alpha_search = letter_gen()
     minerals = Mineral.objects.all()
     if kwargs:
         minerals = [minerals.filter(key=value) for key, value in kwargs]
     return render(request,
                   'minerals/mineral_list.html',
-                  {'minerals': minerals,
-                   'alpha_search': alpha_search})
+                  {'minerals': minerals})
 
 
 def group_list(request, pk):
@@ -88,11 +86,11 @@ def random_group(request):
 
 
 def by_alpha(request, term):
-    alpha_search = letter_gen()
     minerals = Mineral.objects.filter(name__startswith=term)
+    term = term
     return render(request,
                   'minerals/mineral_list.html',
-                  {'minerals': minerals, 'alpha_search': alpha_search})
+                  {'minerals': minerals, 'term': term})
 
 
 def search(request):
