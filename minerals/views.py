@@ -95,7 +95,6 @@ def by_alpha(request, term):
 
 def search(request):
     """Allow users to search mineral fields for specific terms."""
-    alpha_search = letter_gen()
     term = request.GET.get('q')
     # Loop through all fields to return matches using 'Q(field__icontains=term)|' notation?
     # Currently works with no looping.
@@ -116,4 +115,4 @@ def search(request):
     # )
     return render(request,
                   'minerals/mineral_list.html',
-                  {'minerals': minerals, 'alpha_search': alpha_search})
+                  {'minerals': minerals})
