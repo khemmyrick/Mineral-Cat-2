@@ -26,17 +26,17 @@ def jpegger(group_name):
     return '{}.jpg'.format(mineral.name)
 
 
-@register.inclusion_tag('minerals/group_nav.html')
-def nav_groups_list():
+@register.inclusion_tag('minerals/group_nav.html', takes_context=True)
+def nav_groups_list(context):
     """Returns a dictionary of mineral groups to display in layout."""
-    groups = Group.objects.all().order_by('name')
-    return {'groups': groups}
+    group_list = Group.objects.all().order_by('name')
+    return {'group_list': group_list, 'group': context['group']}
 
 
-@register.inclusion_tag('minerals/letters.html')
-def abc_list():
+@register.inclusion_tag('minerals/letters.html', takes_context=True)
+def abc_list(context):
     """Return a list of letters for first letter search."""
     alpha_search = []
     for char in string.ascii_uppercase:
         alpha_search.append(char)
-    return {'alpha_search': alpha_search}
+    return {'alpha_search': alpha_search, 'term': context['term']}

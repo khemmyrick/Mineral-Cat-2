@@ -1,9 +1,15 @@
-{% for group in groups %}
-	<li>
-		{% if pk == group.pk %} <!-- How do I make this look at which group we're currently looking at? -->
-		<strong>{{ group.name }}</strong>
+{% if group %}
+	{% for group_li in group_list %}
+		{% if group_li.name == group.name %}
+			<li class="group__bold">{{ group_li.name }}</li>
 		{% else %}
-		<a class="group__anchor" id="{{ group.name|slugify }}" href="{% url 'minerals:group_list' pk=group.pk %}">{{ group.name }}</a>
+			<li><a class="group__anchor" id="{{ group_li.name|slugify }}" href="{% url 'minerals:group_list' pk=group_li.pk %}">{{ group_li.name }}</a></li>
 		{% endif %}
-	</li>
-{% endfor %}
+	{% endfor %}
+{% else %}
+	{% for group_li in group_list %}
+		<li>
+			<a class="group__anchor" id="{{ group_li.name|slugify }}" href="{% url 'minerals:group_list' pk=group_li.pk %}">{{ group_li.name }}</a>
+		</li>
+	{% endfor %}
+{% endif %}

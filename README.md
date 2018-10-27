@@ -10,6 +10,8 @@
 	- Get CSS working with both Opera AND Chrome?
 4. Allow text search.
 	- EXTRA: FULL Text search.
+5. Allow filter by first letter of mineral name.
+6. Allow filter by group.
 
 
 
@@ -19,13 +21,13 @@
 
 
 # To Do:
-1. Allow filtering by the first letter of the mineral name. []
+1. Allow filtering by the first letter of the mineral name. [x]
 	- Add links for each letter of the alphabet. [x]
 	- This should be added to the layout template so that it appears on every page.[x]
 	- When a letter is clicked, a list of minerals that start with that letter should be displayed in the list view.[x]
-	- The letter of the alphabet currently being displayed should be bolded.[]
-	- In the details view, no letter should be bolded.[]
-	- On the homepage, select ‘A’ by default.[](So, the Homepage should be mineral_list with A selected... no seperate homepage needed)
+	- The letter of the alphabet currently being displayed should be bolded.[x]
+	- In the details view, no letter should be bolded.[x]
+	- On the homepage, select ‘A’ by default.[x]
 
 2. Allow text search. [x]
 	- Add a search box and button.[x]
@@ -34,13 +36,14 @@
 	- The names of the minerals that match the search will be displayed in the list view.[x]
 	- Add the search form to the layout template so that searching can be performed from any page in the site.[x]
 
-3. Allow filtering by group. []
+3. Allow filtering by group. [x]
 	- Add the ability to filter the list of minerals by adding links to these groups on the left side of the layout template.[x]
-	- Clicking a group name, displays a list of all of the minerals in the database that are in that group. []
-	- The group name being displayed should be bolded. []<--(use if block.  Easy[!!!?], once template tag issue is sorted.)
-	- In the details view, no group name should be bolded. []
+	- Clicking a group name, displays a list of all of the minerals in the database that are in that group. [x]
+	- The group name being displayed should be bolded. [x]
+	- In the details view, no group name should be bolded. [x]
+	- Group List view now renders to mineral list template.  Group List template is now deprecated.
 
-4. Optimize database queries [] <---- This should be the hard part.
+4. Optimize database queries [] <---- This should be the hard part.  This weekend's mission.
 	- Apply django-debug-toolbar to project. []
 	- Use the django-debug-toolbar to check that queries to the database take no longer than 10ms to complete. []
 
@@ -58,9 +61,10 @@
 # To Exceed Expectations! (Definitely Do These)
 1. Allow full-text search[x]
 	- Instead of only searching the mineral names, the site will search all fields in the database and display the names of the minerals that contain the search text. [x]
+	- Add option to restrict/expand text search? Not an element of the original assignment.[]
 
 2. Add more ways to filter.[]
-	- Instead of just filtering by first letter and group, add one or more additional filters.[]
+	- Instead of just filtering by first letter and group, add one or more additional filters.[](Use category and color attributes.)
 	- These should behave like the group filter.[]
 	- Example filters are color and crystal habit, but you can choose to add filtering for any property you like.
 	- Hint: the filters can act like canned search queries. [more of the same, definitely do this, to a point!]

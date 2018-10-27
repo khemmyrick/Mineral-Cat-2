@@ -31,9 +31,8 @@
 						<li><a href="{% url 'minerals:random_group' %}" class="minerals__anchor">Random Mineral Group Page</a></li>
 					</ul>
 						<form action="{% url 'minerals:search' %}" method="get">
-							<ul>
-								<li><input class="minerals__anchor" type="search" name="q"></li><li><button class="minerals__anchor" type="submit">Search</button></li>
-							</ul>
+							<input class="minerals__anchor" type="search" name="q"><button class="minerals__anchor" type="submit">Search</button>
+							
                         </form>
 				</nav>
 				<hr>
@@ -46,6 +45,9 @@
 			<!-- Move ABCs with links to first letter searches here from mineral_list template -->
 			<!-- MAYBE use an inclusion tag somehow? -->
 			{% abc_list %}
+			{% if group.name %}
+				<h2 class="text-centered" style="color: white;">{{ group.name }}</h2>
+			{% endif %}
 			{% block content %}{% endblock %}
 			</div>
 		</div>
