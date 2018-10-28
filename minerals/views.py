@@ -1,6 +1,5 @@
 import random
 import re
-import string
 
 from django.shortcuts import get_object_or_404, render
 from django.db.models import Q
@@ -9,46 +8,52 @@ from django.db import models as orig_g
 from .models import Group, Mineral
 
 
-def letter_gen():
-    alpha_search = []
-    for char in string.ascii_uppercase:
-        alpha_search.append(char)
-    return alpha_search
-
-    
 def index(request):
     return by_alpha(request, 'A')
-    # groups = Group.objects.all()
-    # return render(request,
-    #              'minerals/index.html',
-    #              {'groups': groups})
 
 
 def mineral_list(request, **kwargs):
     """Generate template list of all minerals."""
-    minerals = Mineral.objects.all()
+    minerals = Mineral.objects.values('name', 'group', 'id')
     if kwargs:
         minerals = [minerals.filter(key=value) for key, value in kwargs]
+    group = ''
+    term = ''
+    categ = ''
+    return render(request,
+                  'minerals/mineral_list.html',
+                  {'minerals': minerals,
+                   'group': group,
+                   'term': term,
+                   'categ': categ})
+
+
+def group_list(request, pk):
+    """Generate template list of all minerals in a specific group."""
+    minerals = Mineral.objects.filter(group__id=pk).values('name', 'group', 'id')
+    group = get_object_or_404(Group, pk=pk)
+    term = ''
+    categ = ''
+    return render(request,
+                  'minerals/mineral_list.html',
+                  {'minerals': minerals,
+                   'group': group,
+                   'term': term,
+                   'categ': categ})
+
+
+def cat_list(request, term):
+    """Generate template list of all minerals in a specific category."""
+    minerals = Mineral.objects.filter(category__icontains=term).values('name', 'group', 'id')
+    categ = term
     group = ''
     term = ''
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals,
                    'group': group,
-                   'term': term})
-
-
-def group_list(request, pk):
-    """Generate template list of all minerals in a specific group."""
-    minerals = Mineral.objects.filter(group__id=pk)
-    group = get_object_or_404(Group, pk=pk)
-    # minerals = group.get_min()
-    term = ''
-    return render(request,
-                  'minerals/mineral_list.html',
-                  {'minerals': minerals,
-                   'group': group,
-                   'term': term})
+                   'term': term,
+                   'categ': categ})
 
 
 def mineral_detail(request, pk):
@@ -69,25 +74,19 @@ def mineral_detail(request, pk):
     attrlist = list(result)
     group = ''
     term = ''
+    categ = ''
     return render(request,
                   'minerals/mineral_detail.html',
                   {'mineral': mineral,
                    'attrlist': attrlist,
                    'group': group,
-                   'term': term})
+                   'term': term,
+                   'categ': categ})
 
 
 def random_mineral(request):
     pickfrom = len(Mineral.objects.all())
     prikey = random.randint(1, pickfrom)
-    return mineral_detail(request, prikey)
-
-
-def random_ingroup(request, pk):
-    group = get_object_or_404(Group, pk=pk)
-    minerals = group.get_min()
-    m_choice = [mineral.pk for mineral in minerals]
-    prikey = random.choice(m_choice)
     return mineral_detail(request, prikey)
 
 
@@ -98,14 +97,27 @@ def random_group(request):
 
 
 def by_alpha(request, term):
-    minerals = Mineral.objects.filter(name__startswith=term)
+    minerals = Mineral.objects.filter(name__startswith=term).values('name', 'group', 'id')
     term = term
     group = ''
+    categ = ''
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals,
                    'term': term,
-                   'group': group})
+                   'group': group,
+                   'categ': categ})
+
+
+# def by_cat(request, term):
+#    minerals = Mineral.objects.filter(category=term).values('name', 'group', 'id')
+#    term = term
+#    group = ''
+#    return render(request,
+#                  'minerals/mineral_list.html',
+#                  {'minerals': minerals,
+#                   'term': term,
+#                   'group': group})    
 
 
 def search(request):
@@ -124,14 +136,16 @@ def search(request):
         Q(diaphaneity__icontains=term)|Q(optical_properties__icontains=term)|
         Q(refractive_index__icontains=term)|Q(crystal_habit__icontains=term)|
         Q(specific_gravity__icontains=term)
-    )
+    ).values('name', 'group', 'id')
     # minerals = Mineral.objects.filter(
     #    Q(name|imgcap|category|formula|strunz_classification|color|crystal_system|unit_cell|crystal_symmetry|cleavage__icontains=term)
     # )
     group = ''
     term = ''
+    categ = ''
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals,
                    'group': group,
-                   'term': term})
+                   'term': term,
+                   'categ': categ})

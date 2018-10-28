@@ -5,19 +5,19 @@
 
 1. Start Project 8 from end of Project 6.
 2. Search by Group functionality somewhat deployed as of Project 6!
-	- Search by Group functionality needs to be adjusted to Project 8 specs. []
+	- Search by Group functionality needs to be adjusted to Project 8 specs. [x]
 3. Make templates match (or exceed) sample files.  (Mostly) deployed as of Project 6.
-	- Get CSS working with both Opera AND Chrome?
 4. Allow text search.
 	- EXTRA: FULL Text search.
 5. Allow filter by first letter of mineral name.
 6. Allow filter by group.
+7. In Progress: Filter by category.
 
 
 
-# Pre-Existing Errors to Debug
-1. (Surprise discovery) P6 CSS Works (mostly) as intended in Opera 56 but not Chrome 69.
-2. (Known known) JavaScript Slideshow as-is is objectively un-aesthetic. [Unless I think of somewhere else to put it, deprecate with non-list homepage]
+# Pre-Existing Errors to Debug [x]
+1. What I thought was a CSS error turned out to be an issue in Chrome's cache, somehow. 
+2. Homepage is now mineral list with A minerals selected.  Slideshow not in use.
 
 
 # To Do:
@@ -43,9 +43,9 @@
 	- In the details view, no group name should be bolded. [x]
 	- Group List view now renders to mineral list template.  Group List template is now deprecated.
 
-4. Optimize database queries [] <---- This should be the hard part.  This weekend's mission.
-	- Apply django-debug-toolbar to project. []
-	- Use the django-debug-toolbar to check that queries to the database take no longer than 10ms to complete. []
+4. Optimize database queries [] <---- Mostly done.  Just need to finish category list.
+	- Apply django-debug-toolbar to project. [x] <---- That felt clumsy and haphazard but at least it happened!!!!
+	- Use the django-debug-toolbar to check that queries to the database take no longer than 10ms to complete. [x]
 
 5. Unit test the app. []
 	- Write unit tests to test that each view is displaying the correct information.[]
@@ -68,3 +68,4 @@
 	- These should behave like the group filter.[]
 	- Example filters are color and crystal habit, but you can choose to add filtering for any property you like.
 	- Hint: the filters can act like canned search queries. [more of the same, definitely do this, to a point!]
+	- Attempting right side category list.  Afterwards, goto unit testing.[]

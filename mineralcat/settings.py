@@ -31,13 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'minerals.apps.MineralsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
+    'minerals.apps.MineralsConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'mineralcat.urls'
@@ -130,3 +132,12 @@ STATICFILES_DIRS = (
 FIXTURE_DIRS = (
    '/mineralcat/minerals/fixtures/',
 )
+
+# INTERNAL_IPS = ('127.0.0.1', '::1', '0.0.0.0.')
+
+# def show_toolbar(request):
+#    return True
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK" : lambda x: True
+}

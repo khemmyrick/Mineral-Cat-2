@@ -11,6 +11,6 @@ urlpatterns = [
     path('mineral_detail/<pk>/', views.mineral_detail, name='mineral_detail'),
     path('group_list/<pk>', views.group_list, name='group_list'),
     path('by_alpha/<term>', views.by_alpha, name='by_alpha'),
-    path('search/', views.search, name='search'),
-    path('random_ingroup/<pk>', views.random_ingroup, name='random_ingroup'),
+    path('cat_list/<term>', views.cat_list, name='cat_list'),
+    path('search/', views.search, name='search')
 ]

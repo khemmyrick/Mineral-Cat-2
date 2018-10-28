@@ -1,0 +1,13 @@
+{% if categ %}
+	{% for category in categories %}
+		{% if category == categ %}
+			<li class="group__bold">{{ category }}</li>
+		{% else %}
+			<li class="group__bold">{{ category }}</li>
+		{% endif %}
+	{% endfor %}
+{% else %}
+	{% for category in categories %}
+			<li class="group__bold">{{ category }}</li>
+	{% endfor %}
+{% endif %}

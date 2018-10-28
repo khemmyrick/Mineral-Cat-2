@@ -4,3 +4,4 @@ anaconda-project==0.8.0
 django==2.1
 jsonschema==2.6.0
 python==3.6.3
+debug_toolbar==1.10.1
