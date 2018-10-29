@@ -20,12 +20,14 @@ def mineral_list(request, **kwargs):
     group = ''
     term = ''
     categ = ''
+    target_color = ''
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals,
                    'group': group,
                    'term': term,
-                   'categ': categ})
+                   'categ': categ,
+                   'target_color': target_color})
 
 
 def group_list(request, pk):
@@ -34,12 +36,14 @@ def group_list(request, pk):
     group = get_object_or_404(Group, pk=pk)
     term = ''
     categ = ''
+    target_color = ''
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals,
                    'group': group,
                    'term': term,
-                   'categ': categ})
+                   'categ': categ,
+                   'target_color': target_color})
 
 
 def cat_list(request, term):
@@ -48,12 +52,30 @@ def cat_list(request, term):
     categ = term
     group = ''
     term = ''
+    target_color = ''
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals,
                    'group': group,
                    'term': term,
-                   'categ': categ})
+                   'categ': categ,
+                   'target_color': target_color})
+
+
+def color_search(request, term):
+    """Generate list of minerals that sometimes contain a given color."""
+    minerals = Mineral.objects.filter(color__icontains=term).values('name', 'group', 'id')
+    target_color = term
+    categ = ''
+    group = ''
+    term = ''
+    return render(request,
+                  'minerals/mineral_list.html',
+                  {'minerals': minerals,
+                   'group': group,
+                   'term': term,
+                   'categ': categ,
+                   'target_color': target_color})
 
 
 def mineral_detail(request, pk):
@@ -75,13 +97,15 @@ def mineral_detail(request, pk):
     group = ''
     term = ''
     categ = ''
+    target_color = ''
     return render(request,
                   'minerals/mineral_detail.html',
                   {'mineral': mineral,
                    'attrlist': attrlist,
                    'group': group,
                    'term': term,
-                   'categ': categ})
+                   'categ': categ,
+                   'target_color': target_color})
 
 
 def random_mineral(request):
@@ -101,12 +125,14 @@ def by_alpha(request, term):
     term = term
     group = ''
     categ = ''
+    target_color = ''
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals,
                    'term': term,
                    'group': group,
-                   'categ': categ})
+                   'categ': categ,
+                   'target_color': target_color})
 
 
 # def by_cat(request, term):
@@ -143,9 +169,11 @@ def search(request):
     group = ''
     term = ''
     categ = ''
+    target_color = ''
     return render(request,
                   'minerals/mineral_list.html',
                   {'minerals': minerals,
                    'group': group,
                    'term': term,
-                   'categ': categ})
+                   'categ': categ,
+                   'target_color': target_color})

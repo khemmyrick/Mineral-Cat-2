@@ -45,6 +45,25 @@ def min_cat_list(context):
     return {'categories': categories, 'categ': context['categ']}
 
 
+@register.inclusion_tag('minerals/color_nav.html', takes_context=True)
+def color_list(context):
+    """Returns a dictionary of possible mineral colors to display in layout."""
+    colors = ['Black',
+              'Blue',
+              'Brown',
+              'Colorless',
+              'Gray',
+              'Green',
+              'Indigo',
+              'Orange',
+              'Purple',
+              'Red',
+              'Violet',
+              'White',
+              'Yellow']
+    return {'colors': colors, 'target_color': context['target_color']}
+
+
 @register.inclusion_tag('minerals/letters.html', takes_context=True)
 def abc_list(context):
     """Return a list of letters for first letter search."""

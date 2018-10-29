@@ -50,6 +50,149 @@
 #mg_head {
 	color: #FFFFFF;
 }
+
+#Black {
+	background-color: black;
+	color: #FFFFFF;
+}
+
+#Black:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+	}
+
+#Blue {
+	background-color: blue;
+	color: #FFFFFF;
+}
+
+#Blue:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Brown {
+	background-color: brown;
+	color: #000000;
+}
+
+#Brown:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Gray {
+	background-color: gray;
+	color: #000000;
+}
+
+#Gray:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Green {
+	background-color: green;
+	color: #000000;
+}
+
+#Green:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Indigo {
+	background-color: indigo;
+	color: #FFFFFF;
+}
+
+#Indigo:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Orange {
+	background-color: orange;
+	color: #000000;
+}
+
+#Orange:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Purple {
+	background-color: purple;
+	color: #000000;
+}
+
+#Purple:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Red {
+	background-color: red;
+	color: #000000;
+}
+
+#Red:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Violet {
+	background-color: violet;
+	color: #000000;
+}
+
+#Violet:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#White {
+	background-color: white;
+	color: #000000;
+}
+
+#White:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Yellow {
+	background-color: yellow;
+	color: #000000;
+}
+
+#Yellow:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
+
+#Colorless {
+	background-color: transparent;
+	color: #000000;
+}
+
+#Colorless:hover { 
+		background-color: #BDE5DD;
+		color: #000000;
+		font-weight: bold;
+}
 	
 .group_menu {
 	background-color: #384033;

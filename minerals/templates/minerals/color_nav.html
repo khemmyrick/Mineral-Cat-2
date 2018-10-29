@@ -1,0 +1,13 @@
+{% if target_color %}
+	{% for color in colors %}
+		{% if color == target_color %}
+			<li class="group__bold">{{ color }}</li>
+		{% else %}
+			<li><a class="group__anchor" href="{% url 'minerals:color_search' term=color %}" id="{{ color }}">{{ color }}</a></li>
+		{% endif %}
+	{% endfor %}
+{% else %}
+	{% for color in colors %}
+			<li><a class="group__anchor" href="{% url 'minerals:color_search' term=color %}" id="{{ color }}">{{ color }}</a></li>
+	{% endfor %}
+{% endif %}
