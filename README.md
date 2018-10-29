@@ -11,7 +11,7 @@
 	- EXTRA: FULL Text search.
 5. Allow filter by first letter of mineral name.
 6. Allow filter by group.
-7. In Progress: Filter by category.
+7. Allow filter by color.
 
 
 
@@ -63,9 +63,10 @@
 	- Instead of only searching the mineral names, the site will search all fields in the database and display the names of the minerals that contain the search text. [x]
 	- Add option to restrict/expand text search? Not an element of the original assignment.[]
 
-2. Add more ways to filter.[]
-	- Instead of just filtering by first letter and group, add one or more additional filters.[](Use category and color attributes.)
-	- These should behave like the group filter.[]
+2. Add more ways to filter.[x]
+	- Instead of just filtering by first letter and group, add one or more additional filters.[x](Use color attribute.)
+	- (Tried to add category, but formatting of strings and html posed an obstacle.)
+	- These should behave like the group filter.[x]
 	- Example filters are color and crystal habit, but you can choose to add filtering for any property you like.
-	- Hint: the filters can act like canned search queries. [more of the same, definitely do this, to a point!]
-	- Attempting right side category list.  Afterwards, goto unit testing.[]
+	- Hint: the filters can act like canned search queries.
+	- (Ask Slack about Category list difficulties).[]
