@@ -3,11 +3,11 @@
 		{% if category == categ %}
 			<li class="group__bold">{{ category }}</li>
 		{% else %}
-			<li class="group__bold">{{ category }}</li>
+			<a href="#" class="group__anchor"><li class="group__bold">{{ category }}</li></a>
 		{% endif %}
 	{% endfor %}
 {% else %}
 	{% for category in categories %}
-			<li class="group__bold">{{ category }}</li>
+			<a href="#" class="group__anchor"><li>{{ category|truncatewords_html:1 }}</li></a>
 	{% endfor %}
 {% endif %}
