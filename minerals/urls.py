@@ -11,7 +11,6 @@ urlpatterns = [
     path('mineral_detail/<pk>/', views.mineral_detail, name='mineral_detail'),
     path('group_list/<pk>', views.group_list, name='group_list'),
     path('by_alpha/<term>', views.by_alpha, name='by_alpha'),
-    path('cat_list/<term>', views.cat_list, name='cat_list'),
     path('color_search/<term>/', views.color_search, name='color_search'),
     path('search/', views.search, name='search')
 ]

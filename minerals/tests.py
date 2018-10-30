@@ -85,7 +85,7 @@ class ViewsTests(TestCase):
             category="Carbonate mineral, protein",
             formula="<sub>amethyst</sub>",
             strunz_classification="05.AB",
-            color="white, pink, silver, cream, etc",
+            color="Purple, Violet, Indigo",
             crystal_system="Orthorhombic",
             unit_cell="",
             crystal_symmetry="",
@@ -129,7 +129,7 @@ class ViewsTests(TestCase):
             category="Carbonate mineral, protein",
             formula="<sub>garnet</sub>",
             strunz_classification="05.AB",
-            color="purple, violet, cotten candy",
+            color="purple, violet, cotton candy",
             crystal_system="Orthorhombic",
             unit_cell="",
             crystal_symmetry="",
@@ -152,7 +152,7 @@ class ViewsTests(TestCase):
             category="Carbonate mineral, protein",
             formula="<sub>nephrite</sub>",
             strunz_classification="05.AB",
-            color="white, pink, silver, cream, etc",
+            color="yellow, black",
             crystal_system="Orthorhombic",
             unit_cell="",
             crystal_symmetry="",
@@ -174,7 +174,7 @@ class ViewsTests(TestCase):
             category="Carbonate mineral, protein",
             formula="<sub>jasper</sub>",
             strunz_classification="05.AB",
-            color="white, pink, silver, cream, etc",
+            color="green, yellow, black",
             crystal_system="Orthorhombic",
             unit_cell="",
             crystal_symmetry="",
@@ -189,22 +189,30 @@ class ViewsTests(TestCase):
             specific_gravity="2.60–2.85",
             group=self.hg
         )
-        self.dnw = ['DoesNotExist', 'MultipleObjectsReturned', '_state', 'id',
-               'name', 'imgcap', 'imgfile', 'objects', 'group', 'category',
-               'formula', 'group_id']
+        self.dnw = [
+            'DoesNotExist',
+            'MultipleObjectsReturned',
+            '_state',
+            'id',
+            'name',
+            'imgcap',
+            'imgfile',
+            'objects',
+            'group',
+            'category',
+            'formula',
+            'group_id'
+        ]
         self.dnw_member = random.choice(self.dnw)
-        
         self.all_min = Mineral.objects.all()
-        
         self.all_groups = Group.objects.all()
-        
         self.cg_list = self.cg.get_min()
-        
+        self.hg_list = self.hg.get_min()
+
     def test_index_view(self):
         resp = self.client.get(reverse('minerals:index'))
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
-        self.assertFalse(resp.context['categ'])
         mineral1 = {'name': self.amethyst.name,
                     'group': self.amethyst.group.id,
                     'id': self.amethyst.id}
@@ -219,10 +227,9 @@ class ViewsTests(TestCase):
     def test_mineral_list_view(self):
         resp = self.client.get('/minerals/mineral_list/')
         self.assertEqual(resp.status_code, 200)
-        self.assertFalse(resp.context['categ'])
         self.assertFalse(resp.context['group'])
         self.assertFalse(resp.context['target_color'])
-        self.assertFalse(resp.context['term'])
+        self.assertFalse(resp.context['target_letter'])
         self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
         mineral1 = {'name': self.rosequartz.name,
                     'group': self.rosequartz.group.id,
@@ -269,6 +276,9 @@ class ViewsTests(TestCase):
         )
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
+        hgmin = self.hg_list.values(
+            'name', 'group', 'id'
+        )
         mineral1 = {'name': self.nephrite.name,
                     'group': self.nephrite.group.id,
                     'id': self.nephrite.id}
@@ -278,9 +288,35 @@ class ViewsTests(TestCase):
         mineral3 = {'name': self.rosequartz.name,
                     'group': self.rosequartz.group.id,
                     'id': self.rosequartz.id}
+        mineral4 = hgmin[1]
         self.assertIn(mineral1,
                       resp.context['minerals'])
         self.assertIn(mineral2,
+                      resp.context['minerals'])
+        self.assertNotIn(mineral3,
+                         resp.context['minerals'])
+        self.assertIn(mineral4,
+                      resp.context['minerals'])
+
+    def test_color_search_view(self):
+        resp = self.client.get(
+            reverse('minerals:color_search',
+                    kwargs={'term': 'cotton candy'})
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
+        mineral1 = {'name': self.garnet.name,
+                    'group': self.garnet.group.id,
+                    'id': self.garnet.id}
+        mineral2 = {'name': self.jasper.name,
+                    'group': self.jasper.group.id,
+                    'id': self.jasper.id}
+        mineral3 = {'name': self.rosequartz.name,
+                    'group': self.rosequartz.group.id,
+                    'id': self.rosequartz.id}
+        self.assertIn(mineral1,
+                      resp.context['minerals'])
+        self.assertNotIn(mineral2,
                       resp.context['minerals'])
         self.assertNotIn(mineral3,
                          resp.context['minerals'])
@@ -290,11 +326,11 @@ class ViewsTests(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
         self.assertTrue(resp.context['group'])
-        self.assertFalse(resp.context['categ'])
-        self.assertFalse(resp.context['target_color'])
-        self.assertFalse(resp.context['term'])
 
-    def test_by_alpha(self):
+        self.assertFalse(resp.context['target_color'])
+        self.assertFalse(resp.context['target_letter'])
+
+    def test_by_alpha_view(self):
         resp = self.client.get(reverse('minerals:by_alpha',
                                        kwargs={'term': 'R'}))
         self.assertEqual(resp.status_code, 200)
@@ -313,6 +349,21 @@ class ViewsTests(TestCase):
         self.assertNotIn(mineral2,
                          resp.context['minerals'])
         self.assertNotIn(mineral3,
+                         resp.context['minerals'])
+
+    def test_search_view(self):
+        resp = self.client.get(reverse('minerals:search')
+        term = 'Rose Quartz faces Pink Diamond through a pane of glass'
+        self.assertEqual(resp.status_code, 200)  # FAILS. How do I test this?
+        mineral1 = {'name': self.rosequartz.name,
+                    'group': self.rosequartz.group.id,
+                    'id': self.rosequartz.id}
+        mineral2 = {'name': self.garnet.name,
+                    'group': self.garnet.group.id,
+                    'id': self.garnet.id}
+        self.assertIn(mineral1,
+                      resp.context['minerals'])
+        self.assertNotIn(mineral2,
                          resp.context['minerals'])
 
 class MineralExtrasTests(TestCase):
@@ -418,7 +469,7 @@ class MineralExtrasTests(TestCase):
         )
 
     def test_abc_list(self):
-        context = Context({'term': 'A'})
+        context = Context({'target_letter': 'A'})
         template_to_render = Template(
             '{% load mineral_extras %}'
             '{% abc_list %}'

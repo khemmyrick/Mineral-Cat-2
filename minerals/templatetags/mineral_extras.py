@@ -30,24 +30,13 @@ def jpegger(group_name):
 def nav_groups_list(context):
     """Returns a dictionary of mineral groups to display in layout."""
     group_list = Group.objects.all().order_by('name')
-    return {'group_list': group_list, 'group': context['group']}
-    
-
-@register.inclusion_tag('minerals/cat_list.html', takes_context=True)
-def min_cat_list(context):
-    """Returns a dictionary of mineral categories to display in layout."""
-    minerals = Mineral.objects.all()
-    categories = []
-    for mineral in minerals:
-        categories.append(mineral.category)
-    categories = set(categories)
-    categories = list(categories)
-    return {'categories': categories, 'categ': context['categ']}
+    return {'group_list': group_list,
+            'group': context['group']}
 
 
 @register.inclusion_tag('minerals/color_nav.html', takes_context=True)
 def color_list(context):
-    """Returns a dictionary of possible mineral colors to display in layout."""
+    """Returns dictionary of possible mineral colors to display in layout."""
     colors = ['Black',
               'Blue',
               'Brown',
@@ -61,7 +50,8 @@ def color_list(context):
               'Violet',
               'White',
               'Yellow']
-    return {'colors': colors, 'target_color': context['target_color']}
+    return {'colors': colors,
+            'target_color': context['target_color']}
 
 
 @register.inclusion_tag('minerals/letters.html', takes_context=True)
@@ -70,4 +60,5 @@ def abc_list(context):
     alpha_search = []
     for char in string.ascii_uppercase:
         alpha_search.append(char)
-    return {'alpha_search': alpha_search, 'term': context['term']}
+    return {'alpha_search': alpha_search,
+            'target_letter': context['target_letter']}
