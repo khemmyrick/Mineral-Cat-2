@@ -32,7 +32,11 @@ def mineral_list(request, **kwargs):
 
 def group_list(request, pk):
     """Generate template list of all minerals in a specific group."""
-    minerals = Mineral.objects.filter(group__id=pk).values('name', 'group', 'id')
+    minerals = Mineral.objects.filter(
+        group__id=pk
+    ).values(
+        'name', 'group', 'id'
+    )
     group = get_object_or_404(Group, pk=pk)
     term = ''
     categ = ''
@@ -121,7 +125,11 @@ def random_group(request):
 
 
 def by_alpha(request, term):
-    minerals = Mineral.objects.filter(name__startswith=term).values('name', 'group', 'id')
+    minerals = Mineral.objects.filter(
+        name__startswith=term
+    ).values(
+        'name', 'group', 'id'
+    )
     term = term
     group = ''
     categ = ''

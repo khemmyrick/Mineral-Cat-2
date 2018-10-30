@@ -203,36 +203,53 @@ class ViewsTests(TestCase):
     def test_index_view(self):
         resp = self.client.get(reverse('minerals:index'))
         self.assertEqual(resp.status_code, 200)
-        # Check that by_alpha runs.
-        # self.assertIn(self.cg, resp.context['groups'])
-        # self.assertIn(self.hg, resp.context['groups'])
+        self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
+        self.assertFalse(resp.context['categ'])
+        mineral1 = {'name': self.amethyst.name,
+                    'group': self.amethyst.group.id,
+                    'id': self.amethyst.id}
+        mineral2 = {'name': self.rosequartz.name,
+                    'group': self.rosequartz.group.id,
+                    'id': self.rosequartz.id}
+        self.assertIn(mineral1,
+                      resp.context['minerals'])
+        self.assertNotIn(mineral2,
+                         resp.context['minerals'])
         
     def test_mineral_list_view(self):
-        # resp = self.client.get(reverse('minerals:mineral_list'))
         resp = self.client.get('/minerals/mineral_list/')
         self.assertEqual(resp.status_code, 200)
-        self.assertIn('', resp.context['categ'])
-        self.assertIn('', resp.context['group'])
-        self.assertIn('', resp.context['target_color'])
-        self.assertIn('', resp.context['term'])
+        self.assertFalse(resp.context['categ'])
+        self.assertFalse(resp.context['group'])
+        self.assertFalse(resp.context['target_color'])
+        self.assertFalse(resp.context['term'])
         self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
-        self.assertTrue(resp.context['minerals'])
-        ## CHECK THAT minerals IS PASSING MINERAL OBJECTS TO TEMPLATE.
-        assert isinstance(resp.context['minerals'], object)
-        # assert isinstance(resp.context['minerals'], self.QuerySet)
-        # self.assertIn(dict, resp.context['minerals'])
-        # self.assertIn(self.amethyst, resp.context['minerals'])
-        # self.assertIn(self.nephrite, resp.context['minerals'])
-        # self.assertIn(self.jasper, resp.context['minerals'])
+        mineral1 = {'name': self.rosequartz.name,
+                    'group': self.rosequartz.group.id,
+                    'id': self.rosequartz.id}
+        mineral2 = {'name': self.garnet.name,
+                    'group': self.garnet.group.id,
+                    'id': self.garnet.id}
+        mineral3 = {'name': self.nephrite.name,
+                    'group': self.nephrite.group.id,
+                    'id': self.nephrite.id}
+        mineral4 = {'name': self.jasper.name,
+                    'group': self.jasper.group.id,
+                    'id': self.jasper.id}
+        self.assertIn(mineral1,
+                      resp.context['minerals'])
+        self.assertIn(mineral2,
+                      resp.context['minerals'])
+        self.assertIn(mineral3,
+                      resp.context['minerals'])
+        self.assertIn(mineral4,
+                      resp.context['minerals'])
 
-#    def test_mineral_list_view(self):
-#        resp = self.client.get(reverse('minerals:mineral_list',
-#                                       kwargs={'streak': 'justice'}))
-#        self.assertEqual(resp.status_code, 200)
-#    
     def test_mineral_detail_view(self):
-        resp = self.client.get(reverse('minerals:mineral_detail',
-                                       kwargs={'pk': self.pearl.pk}))
+        resp = self.client.get(
+            reverse('minerals:mineral_detail',
+                    kwargs={'pk': self.pearl.pk})
+        )
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(self.pearl, resp.context['mineral'])
         self.assertNotIn(self.dnw_member, resp.context['attrlist'])
@@ -243,36 +260,68 @@ class ViewsTests(TestCase):
         resp = self.client.get(reverse('minerals:random_mineral'))
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'minerals/mineral_detail.html')
-        # self.assertIn(resp.context['mineral'], self.all_min)
+        self.assertTrue(resp.context['mineral'])
 
     def test_group_list_view(self):
-        resp = self.client.get(reverse('minerals:group_list',
-                                       kwargs={'pk': self.hg.pk}))
+        resp = self.client.get(
+            reverse('minerals:group_list',
+                    kwargs={'pk': self.hg.pk})
+        )
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
-        # self.assertIn(self.nephrite, resp.context['minerals'])
-        # self.assertIn(self.jasper, resp.context['minerals'])
-        # self.assertEqual(self.hg, resp.context['group'])
+        mineral1 = {'name': self.nephrite.name,
+                    'group': self.nephrite.group.id,
+                    'id': self.nephrite.id}
+        mineral2 = {'name': self.jasper.name,
+                    'group': self.jasper.group.id,
+                    'id': self.jasper.id}
+        mineral3 = {'name': self.rosequartz.name,
+                    'group': self.rosequartz.group.id,
+                    'id': self.rosequartz.id}
+        self.assertIn(mineral1,
+                      resp.context['minerals'])
+        self.assertIn(mineral2,
+                      resp.context['minerals'])
+        self.assertNotIn(mineral3,
+                         resp.context['minerals'])
 
     def test_random_group_view(self):
         resp = self.client.get(reverse('minerals:random_group'))
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
-        # self.assertIn(resp.context['group'], self.all_groups)
+        self.assertTrue(resp.context['group'])
+        self.assertFalse(resp.context['categ'])
+        self.assertFalse(resp.context['target_color'])
+        self.assertFalse(resp.context['term'])
 
     def test_by_alpha(self):
         resp = self.client.get(reverse('minerals:by_alpha',
-                                       kwargs={'term': 'A'}))
+                                       kwargs={'term': 'R'}))
         self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
+        mineral1 = {'name': self.rosequartz.name,
+                    'group': self.rosequartz.group.id,
+                    'id': self.rosequartz.id}
+        mineral2 = {'name': self.nephrite.name,
+                    'group': self.nephrite.group.id,
+                    'id': self.nephrite.id}
+        mineral3 = {'name': self.amethyst.name,
+                    'group': self.amethyst.group.id,
+                    'id': self.amethyst.id}
+        self.assertIn(mineral1,
+                      resp.context['minerals'])
+        self.assertNotIn(mineral2,
+                         resp.context['minerals'])
+        self.assertNotIn(mineral3,
+                         resp.context['minerals'])
 
 class MineralExtrasTests(TestCase):
-    def test_underspace(self):
-        output = mineral_extras.underspace('attr_string')
-        self.assertEqual(output, 'attr string')
-
-    def test_jpegger(self):
+    def setUp(self):
         self.cg = Group.objects.create(
             name="Crystal Gems"
+        )
+        self.hg = Group.objects.create(
+            name="HomeWorld Gems"
         )
         self.pearl = Mineral.objects.create(
             name="Pearl",
@@ -318,18 +367,35 @@ class MineralExtrasTests(TestCase):
             specific_gravity="2.60–2.85",
             group=self.cg
         )
+
+    def test_underspace(self):
+        output = mineral_extras.underspace('attr_string')
+        self.assertEqual(output, 'attr string')
+
+    def test_jpegger(self):
         self.m_str = mineral_extras.jpegger(self.cg.name)
         self.assertIn('.jpg', self.m_str)
         self.assertIn(self.m_str, ['Amethyst.jpg', 'Pearl.jpg'])
 
     def test_nav_groups_list(self):
-        context = Context({'group': Group.objects.get(name='Sulfates')})
+        context = Context({'group': self.cg})
         template_to_render = Template(
             '{% load mineral_extras %}'
             '{% nav_groups_list %}'
         )
         rendered_template = template_to_render.render(context)
-        self.assertInHTML('<li class="group__bold">Sulfates</li>', rendered_template)
+        # self.assertInHTML(
+        #    '<li class="group__bold">Crystal Gems</li>',
+        #    rendered_template
+        # )
+        self.assertIn(
+            '<li class="group__bold">Crystal Gems</li>',
+            rendered_template
+        )
+        self.assertNotIn(
+            '<li class="group__bold">HomeWorld Gems</li>',
+            rendered_template
+        )
 
     def test_color_list(self):
         context = Context({'target_color': 'Colorless'})
@@ -338,7 +404,18 @@ class MineralExtrasTests(TestCase):
             '{% color_list %}'
         )
         rendered_template = template_to_render.render(context)
-        self.assertInHTML('<li class="group__bold">Colorless</li>', rendered_template)
+        # self.assertInHTML(
+        #    '<li class="group__bold">Colorless</li>',
+        #    rendered_template
+        # )
+        self.assertIn(
+            '<li class="group__bold">Colorless</li>',
+            rendered_template
+        )
+        self.assertNotIn(
+            '<li class="group__bold">White</li>',
+            rendered_template
+        )
 
     def test_abc_list(self):
         context = Context({'term': 'A'})
@@ -347,8 +424,15 @@ class MineralExtrasTests(TestCase):
             '{% abc_list %}'
         )
         rendered_template = template_to_render.render(context)
-        self.assertInHTML('<span style="color: white; font-weight: bold;">A</span>', rendered_template)
-
-        # chosen = views.by_alpha('')
-        # resp = mineral_extras.abc_list('3')
-        # self.assertIn('3', resp)
+        # self.assertInHTML(
+        #    '<span style="color: white; font-weight: bold;">A</span>',
+        #    rendered_template
+        # )
+        self.assertIn(
+            '<span style="color: white; font-weight: bold;">A</span>',
+            rendered_template
+        )
+        self.assertNotIn(
+            '<span style="color: white; font-weight: bold;">B</span>',
+            rendered_template
+        )

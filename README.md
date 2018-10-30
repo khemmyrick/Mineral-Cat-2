@@ -12,12 +12,8 @@
 5. Allow filter by first letter of mineral name.
 6. Allow filter by group.
 7. Allow filter by color.
+8. Write and rewrite tests.
 
-
-
-# Pre-Existing Errors to Debug [x]
-1. What I thought was a CSS error turned out to be an issue in Chrome's cache, somehow. 
-2. Homepage is now mineral list with A minerals selected.  Slideshow not in use.
 
 
 # To Do:
@@ -47,9 +43,9 @@
 	- Apply django-debug-toolbar to project. [x] <---- That felt clumsy and haphazard but at least it happened!!!!
 	- Use the django-debug-toolbar to check that queries to the database take no longer than 10ms to complete. [x]
 
-5. Unit test the app. []
-	- Write unit tests to test that each view is displaying the correct information.[]
-	- Write unit tests to test that the models,[x] classes,[x] and other functions behave as expected.[]
+5. Unit test the app. [x]
+	- Write unit tests to test that each view is displaying the correct information.[x]
+	- Write unit tests to test that the models,[x] classes,[x] and other functions behave as expected.[x]
 
 6. Make the templates match the style used in the example files.[x]
 	- Look at the example HTML files and global.css to determine the styles used in the pages.[x]
@@ -68,4 +64,3 @@
 	- These should behave like the group filter.[x]
 	- Example filters are color and crystal habit, but you can choose to add filtering for any property you like.
 	- Hint: the filters can act like canned search queries.
-	- (Ask Slack about Category list difficulties).[]
