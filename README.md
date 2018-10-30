@@ -43,13 +43,13 @@
 	- In the details view, no group name should be bolded. [x]
 	- Group List view now renders to mineral list template.  Group List template is now deprecated.
 
-4. Optimize database queries [] <---- Mostly done.  Just need to finish category list.
+4. Optimize database queries [x]
 	- Apply django-debug-toolbar to project. [x] <---- That felt clumsy and haphazard but at least it happened!!!!
 	- Use the django-debug-toolbar to check that queries to the database take no longer than 10ms to complete. [x]
 
 5. Unit test the app. []
 	- Write unit tests to test that each view is displaying the correct information.[]
-	- Write unit tests to test that the models,[] classes,[] and other functions behave as expected.[]
+	- Write unit tests to test that the models,[x] classes,[x] and other functions behave as expected.[]
 
 6. Make the templates match the style used in the example files.[x]
 	- Look at the example HTML files and global.css to determine the styles used in the pages.[x]
@@ -61,7 +61,6 @@
 # To Exceed Expectations! (Definitely Do These)
 1. Allow full-text search[x]
 	- Instead of only searching the mineral names, the site will search all fields in the database and display the names of the minerals that contain the search text. [x]
-	- Add option to restrict/expand text search? Not an element of the original assignment.[]
 
 2. Add more ways to filter.[x]
 	- Instead of just filtering by first letter and group, add one or more additional filters.[x](Use color attribute.)
