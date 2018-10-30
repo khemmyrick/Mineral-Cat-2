@@ -354,7 +354,7 @@ class ViewsTests(TestCase):
 
     def test_search_view(self):
         resp = self.client.get('/minerals/search/?q=faces')
-        # term = 'Rose Quartz faces Pink Diamond through a pane of glass'
+        # targeting self.rosequartz image caption
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'minerals/mineral_list.html')
         mineral1 = {'name': self.rosequartz.name,
@@ -367,6 +367,7 @@ class ViewsTests(TestCase):
                       resp.context['minerals'])
         self.assertNotIn(mineral2,
                          resp.context['minerals'])
+
 
 class MineralExtrasTests(TestCase):
     def setUp(self):
