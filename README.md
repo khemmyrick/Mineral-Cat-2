@@ -4,9 +4,9 @@
 # Overview
 
 Picking up where the first MineralCat project left off, MineralCat 2.0 ups the functionality with:
-	- More search options!
-	- Docked menus!
-	- All the buttons you can click!
+- More search options!
+- Docked menus!
+- All the buttons you can click!
 
 
 # New Features in 2.0:
